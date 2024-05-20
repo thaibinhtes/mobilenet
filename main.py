@@ -51,7 +51,7 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 
 model.fit(train_data, epochs=1, validation_data=val_data)
 
-model.save('mobile.tflite')
+model.save('mobilnet.keras')
 # model = tf.keras.models.load_model('my_model.keras')
 
 
