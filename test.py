@@ -3,16 +3,7 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
-# Load the dataset
-(train_data, val_data), info = tfds.load(
-    'tf_flowers',
-    split=['train[:80%]', 'train[80%:]'],
-    with_info=True,
-    as_supervised=True  # Load data as (image, label) pairs
-)
-
-# Get class labels
-class_labels = info.features['label'].names
+class_labels =  ['dandelion', 'daisy', 'tulips', 'sunflowers', 'roses']
 print("Class labels:", class_labels)
 
 # Load the Keras model
