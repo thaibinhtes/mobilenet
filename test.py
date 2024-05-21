@@ -16,8 +16,14 @@ img_array = image.img_to_array(img)
 img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
 img_array = img_array / 255.0  # Normalize pixel values
 
-
+print('====> img_array', img_array)
 # Perform inference
+# Save the numpy array to a binary file
+np.save('array.npy', img_array)
+
+# Print the saved array
+print("Saved numpy array:", img_array)
+    
 predictions = model.predict(img_array)
 
 # Assuming it's a classification model, print the predicted class label
