@@ -1,8 +1,14 @@
 from flask import Flask, send_file, abort, jsonify
 import os
 import shutil
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
+
+@app.route('/')
+def index():
+    return jsonify(message='Flask server!')
 
 @app.route('/download-model')
 def download_file():
@@ -29,4 +35,4 @@ def accept_model():
       abort(500, description=str(e))
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=8888)
+    app.run(debug=True, host="0.0.0.0", port=5000)
