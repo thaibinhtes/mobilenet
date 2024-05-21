@@ -1,4 +1,4 @@
-from flask import Flask, send_file, abort, jsonify
+from flask import Flask, send_file, abort, jsonify, request
 import os
 import shutil
 from flask_cors import CORS
@@ -18,21 +18,11 @@ def download_file():
     except FileNotFoundError:
         abort(404)
 
-@app.route('/accpet-model')
+@app.route('/accept-model', methods=['POST'])
 def accept_model():
-  filename = 'model.tflite'
-  src = os.path.join('models', filename)
-  dest = os.path.join('tested', filename)
-  
-  # Check if the source file exists
-  if not os.path.exists(src):
-      abort(404, description="Source file not found.")
-
-  try:
-      shutil.move(src, dest)
-      return jsonify({"message": f"File '{filename}' moved successfully."}), 200
-  except Exception as e:
-      abort(500, description=str(e))
+    # Get the POST data
+    data = request.json
+    return jsonify({"message": data}), 200
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5000)
