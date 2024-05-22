@@ -3,7 +3,7 @@ import os
 import shutil
 from flask_cors import CORS
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 CORS(app)  # Enable CORS for all routes
 
 @app.route('/')
