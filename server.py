@@ -2,6 +2,7 @@ from flask import Flask, send_file, abort, jsonify, request
 import os
 import shutil
 from flask_cors import CORS
+from retrain import Retrain
 
 app = Flask(__name__, static_folder='static', static_url_path='/static')
 CORS(app)  # Enable CORS for all routes
@@ -22,7 +23,14 @@ def download_file():
 def accept_model():
     # Get the POST data
     data = request.json
-    return jsonify({"message": data}), 200
+
+    try:
+        retrain_model = Retrain(data)
+
+        retrain_model.run()
+        return jsonify({"message": data}), 200  
+    except FileNotFoundError:
+        abort(404)
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5000)

@@ -5,13 +5,14 @@ from tensorflow.keras.models import Model
 import tensorflow_datasets as tfds
 
 class Retrain:
-    def __init__(self):
+    def __init__(self, data):
         self.train_data = None
         self.val_data = None
         self.info = None
         self.IMG_SIZE = 224
         self.BATCH_SIZE = 32
         self.AUTOTUNE = tf.data.experimental.AUTOTUNE
+        self.data = data
 
     def load_data(self):
         (train_data, val_data), info = tfds.load(
